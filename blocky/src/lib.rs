@@ -4,6 +4,6 @@ mod test {
 
     #[test]
     fn test_hello() {
-        block!(["text_1"]("hello_world"));
+        block! { "text_1";"hello_world" };
     }
 }
