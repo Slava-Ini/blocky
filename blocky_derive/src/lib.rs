@@ -2,13 +2,12 @@ extern crate proc_macro;
 
 use proc_macro::TokenStream;
 use syn::parse::{Parse, ParseStream, Result};
-use syn::{Token, LitStr, parse_macro_input};
+use syn::{parenthesized, parse_macro_input, LitStr, Token};
 
 #[allow(dead_code)]
 #[derive(Debug)]
 enum Content {
     Text(String),
-    Number(u32),
     Children(Vec<Block>),
 }
 
@@ -23,11 +22,24 @@ struct Block {
 
 impl Parse for Block {
     fn parse(input: ParseStream) -> Result<Self> {
-        let block_name: LitStr = input.parse()?;
-        input.parse::<Token![;]>()?;
-        let inner_text: LitStr = input.parse()?;
 
-        println!("{:#?}{:#?}", block_name, inner_text);
+        while !input.cursor().eof() {
+            input.parse::<Token![<]>()?;
+            let name: LitStr = input.parse()?;
+            input.parse::<Token![>]>()?;
+        }
+        // let content;
+        // let open_angle_bracket = input.parse::<Token![<]>()?;
+        // let inner_text: LitStr = input.parse()?;
+        // let close_angle_bracket = input.parse::<Token![>]>()?;
+        // parenthesized!(content in input);
+        // let paren_content: LitStr = content.parse()?;
+
+        // println!(
+        //     "{:#?}{:#?}{:#?}",
+        //     open_angle_bracket, inner_text, close_angle_bracket
+        // );
+        // println!("{:#?}", paren_content);
 
         Ok(Block {
             width: 0,
@@ -39,17 +51,13 @@ impl Parse for Block {
 }
 
 // block! {
-//  ["wrapper_1"]
-//      ["text_1"]("Hello, World!")
-//      ["text_2"](123)
-//  ["wrapper_2"]
-//      ["text_3"]("Hello, World!")
-//      ["text_4"](123)
+//  <"wrapper_1">
+//      <"text_1">("Hello, World!")
+//      <"text_2">("123")
+//  <"wrapper_2">
+//      <"text_3">("Hello, World!")
+//      <"text_4">("123")
 // }
-
-// block!(
-//     ["text_1"]("hello_world")
-// );
 
 // block_style! {
 //     wrapper_1 {
