@@ -4,14 +4,11 @@ mod test {
 
     #[test]
     fn test_hello() {
-        // block! {
-        //  <"wrapper_1">
-        //      <"text_1">("Hello, World!")
-        //      <"text_2">(123)
-        //  <"wrapper_2">
-        //      <"text_3">("Hello, World!")
-        //      <"text_4">(123)
-        // }
-        block! { <"text_1">("hello") };
+        block! {
+          <"wrapper">
+            <"text_1">("hello")
+            <"text_2">("world")
+        };
     }
 }
+
