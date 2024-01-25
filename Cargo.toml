@@ -1,5 +1,5 @@
 [workspace]
 members = [
     "blocky",
-    "blocky_derive",
+    "blocky_macro",
 ]

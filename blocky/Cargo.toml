@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-blocky_derive = { path = "../blocky_derive" }
+blocky_macro = { path = "../blocky_macro" }

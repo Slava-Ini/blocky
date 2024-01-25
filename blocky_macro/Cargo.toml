@@ -1,12 +1,13 @@
 [package]
-name = "blocky_derive"
+name = "blocky_macro"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
-name = "blocky_derive"
+name = "blocky_macro"
 proc-macro = true
 
 [dependencies]
 quote = "1.0.33"
+proc-macro2 = "1"
 syn = { version = "2.0.29", features = ["full", "extra-traits"] }
