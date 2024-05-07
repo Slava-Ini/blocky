@@ -1,4 +1,4 @@
-// TODO: 
+// TODO:
 // [ ] - Check all structs visibility
 // [ ] - Display trait for Block may be a feature
 #[derive(Debug)]
@@ -51,13 +51,37 @@ mod test {
 
     #[test]
     fn test_hello() {
+        let text = "hello";
+
         let t: Block = block! {
           <"wrapper">
-            <"text_1">("hello")
+            <"text_1">(text)
             <"text_2">("world")
             <"inner-wrapper">
               <"text_3">("inner")
         };
+
+        // + Easy to read
+        // + Easy to write
+        // - Hard to debug
+        // - Hard to lint and hint
+        block_layout!(t, {
+            "wrapper": {
+                len: 3,
+                font: "Arial",
+                height: 100,
+            }
+            "text_1": {
+                len: 1,
+                font: "Arial",
+                height: 100,
+            }
+            "text_2": {
+                len: 1,
+                font: "Arial",
+                height: 100,
+            }
+        });
 
         println!("{}", t);
     }

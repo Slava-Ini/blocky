@@ -1,6 +1,6 @@
 extern crate proc_macro;
 
-use proc_macro::TokenStream;
+use proc_macro::{Ident, TokenStream};
 use quote::{quote, ToTokens};
 use syn::parse::{Parse, ParseBuffer, ParseStream, Result};
 use syn::{parenthesized, parse_macro_input, LitStr, Token};
@@ -12,15 +12,15 @@ use syn::{parenthesized, parse_macro_input, LitStr, Token};
 //    ( ) - No empty content
 #[derive(Debug)]
 enum VContent {
-    Text(String),
+    Expr(syn::Expr),
     Children(::std::vec::Vec<VBlock>),
 }
 
 impl ToTokens for VContent {
     fn to_tokens(&self, tokens: &mut proc_macro2::TokenStream) {
         match self {
-            VContent::Text(text) => tokens.extend(quote! {
-                Content::Text(#text.to_string())
+            VContent::Expr(expr) => tokens.extend(quote! {
+                Content::Text(#expr.to_string())
             }),
             VContent::Children(children) => tokens.extend(quote! {
                 Content::Children(::std::vec![#(#children),*])
@@ -57,11 +57,11 @@ impl VBlock {
 
         let content;
         parenthesized!(content in input);
-        let text = content.parse::<LitStr>()?.value();
+        let expr = content.parse::<syn::Expr>()?;
 
         return Ok(VBlock {
             name,
-            content: VContent::Text(text),
+            content: VContent::Expr(expr),
         });
     }
 }
