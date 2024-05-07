@@ -65,21 +65,27 @@ mod test {
         // + Easy to write
         // - Hard to debug
         // - Hard to lint and hint
-        block_layout!(t, {
+        block_style!(t, {
             "wrapper": {
                 len: 3,
-                font: "Arial",
-                height: 100,
+                height: 1,
+                active: true,
             }
             "text_1": {
                 len: 1,
-                font: "Arial",
-                height: 100,
+                height: 2,
+                active: true,
             }
             "text_2": {
                 len: 1,
-                font: "Arial",
-                height: 100,
+                height: 3,
+                active: false,
+            }
+        });
+
+        block_func!(t, {
+            "wrapper": {
+                hover: () => {}
             }
         });
 
