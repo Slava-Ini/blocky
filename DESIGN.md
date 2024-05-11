@@ -55,9 +55,27 @@ let b: Block = block! {
 }
 ```
 
+### Resources
 
+- `tui-rs` example of handling higher-level structures (`crossterm`/`termion`)
+- `zi` smaller library for interface manipulations (`crossterm`)
+- `yew` dom manipulations - good macro examples
+- `crossterm`/`termion` - select the one to be building around
+- `inquirer` - terminal prompt (`crossterm`/`termion`/`console`)
+- `ratatui` - terminal UI library (`crossterm`/`termion`/`wezterm`)
+- `comfy-table` - terminal tables library (`crossterm`/`console`)
+- `dialoguer` - terminal prompts etc. (`console`)
 
-<!-- ## Looping -->
+### Steps Done
+
+### Next steps
+
+- Select `crossterm`/`termion`/`console`/`ncurses`/`wezterm`
+- Learn more about how terminal rendering works
+- Decide on `blocky` workflow after researching
+  - Partial rendering
+  - Callbacks (maybe more rusty way of structs)
+
 <!-- ## Conditionals     -->
 <!-- ## Variables -->
 <!-- ## Nested Blocks -->
